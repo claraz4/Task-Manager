@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles.css";
+import { Link } from "react-router-dom";
 
 export default function Progress() {
     return (
@@ -18,7 +19,7 @@ export default function Progress() {
                 </div>
                 <div className="white-button">Claim that break!</div>
             </div>
-            <div className="add-button">+</div>
+            <Link className="add-button" to="./add-task">+</Link>
         </div>
     )
 }

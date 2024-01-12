@@ -12,16 +12,25 @@ body {
 
 :root {
     --grey: rgb(134,134,134);
-    --blue: rgb(8,160,247);
+    --blue: rgb(8, 160, 247);
     --red: rgb(236, 82, 82);
     --blue-bg: rgba(134, 176, 250, 0.15);
     --dark-blue: rgb(2, 46, 71);
+    --green: rgb(52, 167, 112);
+    --yellow: rgb(251, 166, 60);
 }
 
 
 /* COMMON ELEMENTS */
 .page-container {
     padding: 30px;
+}
+
+.h1-title {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--dark-blue);
+    font-weight: 600;
 }
 
 .h2-title {
@@ -48,7 +57,10 @@ body {
 #task-deadline,
 #important-tasks,
 #today-tasks-title,
-#todays-task--container {
+#todays-task--container,
+#todays-task--descriptions,
+#add-task--header,
+.button-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -60,7 +72,8 @@ body {
 #progress-container,
 #important-task--container,
 #todays-tasks--container,
-#todays-task--info {
+#todays-task--info,
+#form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -205,6 +218,7 @@ body {
     font-weight: 500;
     bottom: 30px;
     box-shadow: 2px 5px 7px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
 }
 
 /* Important Tasks */
@@ -293,6 +307,7 @@ body {
     width: 100%;
     height: 80px;
     padding: 10px 20px 10px 20px;
+    justify-content: space-between;
     box-shadow: 9px 9px 18px rgba(184, 184, 184, 0.2),
             -2px -2px 20px rgba(184, 184, 184, 0.2);
 } 
@@ -315,4 +330,129 @@ body {
 #todays-task--info {
     align-items: flex-start;
     margin-left: 20px;
+}
+
+.task-status-bg {
+    background-color: var(--blue-bg);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+
+/* ADD TASK */
+#add-task-page {
+    padding: 40px 20px 40px 20px;
+}
+
+#add-task--header {
+    margin-bottom: 40px;
+}
+
+.go-back-button {
+    height: 50px;
+    width: 50px;
+    background-color: var(--blue-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: var(--grey);
+    font-size: 2.3rem;
+    font-weight: 300;
+    margin: 0;
+    text-decoration: none;
+}
+
+#add-task--header .go-back-button {
+    margin-right: 25px;
+}
+
+#form-container {
+    align-items: flex-start;
+    width: 100%;
+}
+
+.input-box {
+    padding: 20px;
+}
+
+.input-box:focus {
+    border: rgba(134, 134, 134, 0.3) 1.5px solid;
+}
+
+.input-box::placeholder {
+    color: rgba(134, 134, 134, 0.5);
+}
+
+#form-container > label,
+#form-container > h1 {
+    margin-bottom: 10px;
+}  
+
+#form-container > div > button {
+    margin-right: 10px;
+}
+
+.blue-button {
+    color: white;
+    border-radius: 20px;
+    height: 55px;
+    width: 120px;
+    font-family: "Poppins";
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: var(--blue);
+    border: none;
+}
+
+.active-blue-button,
+.blue-button:hover {
+    cursor: pointer;
+    color: var(--blue);
+    border: var(--blue) 1.5px solid;
+    background-color: white;
+}
+
+.input-box,
+.select-input,
+.textarea-input {
+    width: 100%;
+    border-radius: 15px;
+    border: rgba(134, 134, 134, 0.3) 1.5px solid;
+    color: var(--dark-blue);
+    font-family: "Poppins";
+    height: 55px;
+    font-size: 1.2rem;
+}
+
+.select-input {
+    padding-left: 20px;
+}
+
+#date-input--container {
+    width: 100%;
+}
+
+.smaller-input {
+    width: 23%;
+}
+
+.small-input {
+    width: 28%
+}
+
+.medium-input {
+    width: 44%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.textarea-input {
+    height: 130px;
+    padding: 15px;
+}
+
+#form-container > button {
+    width: 100%;
 }
