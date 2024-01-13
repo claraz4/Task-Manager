@@ -1,12 +1,22 @@
 import React from "react";
 import "../styles.css";
-import tasks from "../tasks";
 import TodayTask from "./TodayTask";
 
 export default function TodayTasks() {
+    const [tasks, setTasks] = React.useState([]);
     const [todayTask, setTodayTask] = React.useState([]);
     const [todayTaskElement, setTodayTaskElement] = React.useState([]);
     
+    const fetchData = async () => {
+        try {
+            const res = await fetch('/api/v1/tasks');
+            const data = await res.json();
+            setTasks(() => data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const areDateEqual = (date1, date2) => {
         return (
             date1.getDate() === date2.getDate() &&
@@ -15,20 +25,30 @@ export default function TodayTasks() {
         )
     }
 
+    // Get the tasks from the database
     React.useEffect(() => {
-        setTodayTask(tasks.filter((task) => areDateEqual(task.dueDate, new Date(Date.now()))));
-    }, [tasks]);
+        fetchData();
+    }, []);
 
+    // Get the tasks from today
     React.useEffect(() => {
-        setTodayTaskElement(todayTask.map((task, id) => {
+        setTodayTask(() => tasks.filter((task) => {
+            const dueDate = new Date(task.year, task.month, task.day);
+            return areDateEqual(dueDate, new Date(Date.now()));
+        }));
+    }, [tasks])
+
+    // Create the rendered array
+    React.useEffect(() => {
+        setTodayTaskElement(() => todayTask.map((task, id) => {
             return (
                 <TodayTask 
-                    key={id}
-                    name={task.name}
-                    urgency={task.urgency}
+                key={id}
+                name={task.name}
+                urgency={task.urgency}
                 />
-            )
-        }));
+                )
+        })); 
     }, [todayTask]);
 
     return (

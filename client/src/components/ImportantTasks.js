@@ -1,16 +1,27 @@
 import React from "react";
 import "../styles.css";
 import ImportantTask from "./ImportantTask";
-import tasks from "../tasks";
 
 export default function ImportantTasks() {
+    // Get the important tasks
+    const [tasks, setTasks] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch('/api/v1/tasks')
+            .then((res) => res.json())
+            .then((data) => setTasks(data.data))
+            .catch((error) => console.log(error));
+    }, [])
+    
     const importantTasks = tasks.filter((task) => task.urgency === 1);
     const importantTasksElement = importantTasks.map((task, id) => {
         return (
             <ImportantTask
                 key={id}
                 name={task.name}
-                dueDate={task.dueDate}
+                day={task.day}
+                month={task.month}
+                year={task.year}
                 urgency={task.urgency}
                 category={task.category}
                 description={task.description}

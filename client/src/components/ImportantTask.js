@@ -7,9 +7,9 @@ import all from "../months";
 export default function ImportantTask(props) {
     const {
         name,
-        dueDate,
-        urgency,
-        category,
+        day,
+        month,
+        year,
         description
     } = props;
 
@@ -25,7 +25,7 @@ export default function ImportantTask(props) {
                 <p>&#x2022;&#x2022;&#x2022;</p>
             </div>
             <div id="task-deadline">
-                <p>{`${dueDate.getDate()} ${months[dueDate.getMonth()]} ${dueDate.getFullYear()}`}</p>
+                <p>{`${day} ${months[month]} ${year}`}</p>
                 <img src={uncheckedButton} alt="Checkmark" width="30px" height="30px" className="task-status-bg" />
             </div>
         </div>
