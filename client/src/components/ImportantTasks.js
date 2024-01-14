@@ -13,7 +13,7 @@ export default function ImportantTasks() {
             .catch((error) => console.log(error));
     }, [])
     
-    const importantTasks = tasks.filter((task) => task.urgency === 1);
+    const importantTasks = tasks.filter((task) => task.urgency === 1 && !task.completed);
     const importantTasksElement = importantTasks.map((task, id) => {
         return (
             <ImportantTask

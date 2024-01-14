@@ -341,6 +341,44 @@ body {
 
 
 /* ADD TASK */
+@keyframes slideIn {
+    from {
+        top: -5%;
+    }
+
+    to {
+        top: 3.5%;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        top: 3.5%;
+    }
+
+    to {
+        top: -5%;
+    }
+}
+
+#error-message {
+    position: fixed;
+    top: 3.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    height: 50px;
+    width: 80%;
+    background-color: var(--blue);
+    text-align: center;
+    line-height: 50px;
+    font-size: 1rem;
+    color: var(--dark-blue);
+    font-weight: 500;
+    box-shadow:  3px 3px 11px rgba(0, 0, 0, 0.2);
+    animation: slideIn 1s ease-in, slideOut 1s ease-out 3s;
+}
+
 #add-task-page {
     padding: 40px 20px 40px 20px;
 }

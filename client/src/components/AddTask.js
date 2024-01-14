@@ -3,13 +3,15 @@ import "../styles.css";
 import categories from "../categories";
 import { Link } from "react-router-dom";
 import all from "../months";
+import axios from "axios";
 
 // A PROBLEM TO FIX: YOU CAN'T SET A TASK FOR A DATE THAT ALREADY PASSED
 // YOU NEED TO REMOVE THE DATES THAT ARE BEFORE TODAY
+// YOU ALSO NEED TO ADD WHENEVER A TASK IS OVERDUE
 
 export default function AddTask() {
     const [formData, setFormData] = React.useState({
-        taskName: "",
+        name: "",
         urgency: 3,
         category: 1,
         description: "",
@@ -18,7 +20,11 @@ export default function AddTask() {
         year: (new Date(Date.now())).getFullYear()
     });
 
-    const [btnStatus, setBtnStatus] = React.useState(["", "", ""]);
+    const [errorMessage, setErrorMessage] = React.useState("");
+    const [showErrorMessage, setShowErrorMessage] = React.useState(false);
+
+    const classname = " active-blue-button";
+    const [btnStatus, setBtnStatus] = React.useState(["", "", " active-blue-button"]);
 
     // Handle form change
     function handleChange(event) {
@@ -35,7 +41,6 @@ export default function AddTask() {
     // Handle urgency change
     function handleClick(event) {
         const btn = Number(event.target.value);
-        const classname = " active-blue-button";
 
         let newStatus = ["", "", ""];
         for (let i = 0; i < btnStatus.length; i++) {
@@ -141,12 +146,35 @@ export default function AddTask() {
     }, []);
 
     // Handle the submission of the form
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+
+        // check that all required elements are filled
+        if (formData.name.trim() === "") {
+            showError("Please enter the task's title!");
+            return;
+        }
+
+        try {
+            await axios.post('/api/v1/tasks', formData);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // Changes when we show the error
+    const showError = (msg) => {
+        setErrorMessage(msg);
+        setShowErrorMessage(true);
+
+        setTimeout(() => setShowErrorMessage(false), 3900);
     }
 
     return (
         <div id="add-task-page">
+            {showErrorMessage &&
+                <p id="error-message">{errorMessage}</p>
+            }
             <div id="add-task--header">
                 <Link className="go-back-button" to="/">&lt;</Link>
                 <h2 className="h2-title">Create a New Task</h2>
@@ -154,7 +182,7 @@ export default function AddTask() {
             <form id="form-container" onSubmit={handleSubmit}>
                 <label className="h1-title" htmlFor="task-name">Task Name</label>
                 <input
-                    name="taskName"
+                    name="name"
                     type="text"
                     id="task-name"
                     className="input-box"

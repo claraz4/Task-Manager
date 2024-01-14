@@ -17,6 +17,7 @@ export default function TodayTasks() {
         }
     }
 
+    console.log(tasks)
     const areDateEqual = (date1, date2) => {
         return (
             date1.getDate() === date2.getDate() &&
@@ -32,15 +33,17 @@ export default function TodayTasks() {
 
     // Get the tasks from today
     React.useEffect(() => {
-        setTodayTask(() => tasks.filter((task) => {
+        console.log("tasks:", tasks);
+        console.log("todayTask:", todayTask);
+        setTodayTask(tasks.filter((task) => {
             const dueDate = new Date(task.year, task.month, task.day);
-            return areDateEqual(dueDate, new Date(Date.now()));
+            return areDateEqual(dueDate, new Date(Date.now())) && !task.completed;
         }));
     }, [tasks])
-
+    
     // Create the rendered array
     React.useEffect(() => {
-        setTodayTaskElement(() => todayTask.map((task, id) => {
+        setTodayTaskElement(todayTask.map((task, id) => {
             return (
                 <TodayTask 
                 key={id}
@@ -48,9 +51,10 @@ export default function TodayTasks() {
                 urgency={task.urgency}
                 />
                 )
-        })); 
+            }
+        )); 
     }, [todayTask]);
-
+        
     return (
         <div id="todays-tasks--container">
             <div id="today-tasks-title">
