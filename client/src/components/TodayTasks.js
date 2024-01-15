@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles.css";
 import TodayTask from "./TodayTask";
+import { Link } from "react-router-dom";
 
 export default function TodayTasks() {
     const [tasks, setTasks] = React.useState([]);
@@ -17,7 +18,6 @@ export default function TodayTasks() {
         }
     }
 
-    console.log(tasks)
     const areDateEqual = (date1, date2) => {
         return (
             date1.getDate() === date2.getDate() &&
@@ -33,8 +33,6 @@ export default function TodayTasks() {
 
     // Get the tasks from today
     React.useEffect(() => {
-        console.log("tasks:", tasks);
-        console.log("todayTask:", todayTask);
         setTodayTask(tasks.filter((task) => {
             const dueDate = new Date(task.year, task.month, task.day);
             return areDateEqual(dueDate, new Date(Date.now())) && !task.completed;
@@ -59,7 +57,7 @@ export default function TodayTasks() {
         <div id="todays-tasks--container">
             <div id="today-tasks-title">
                 <h2 className="h2-title">Today's Tasks</h2>
-                <p className="h4-title">See all</p>
+                <Link to="/all-tasks" className="h4-title">See all</Link>
             </div>
             {todayTaskElement}
         </div>

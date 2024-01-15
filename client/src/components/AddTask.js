@@ -4,10 +4,15 @@ import categories from "../categories";
 import { Link } from "react-router-dom";
 import all from "../months";
 import axios from "axios";
+import Title from "./Title";
 
 // A PROBLEM TO FIX: YOU CAN'T SET A TASK FOR A DATE THAT ALREADY PASSED
 // YOU NEED TO REMOVE THE DATES THAT ARE BEFORE TODAY
 // YOU ALSO NEED TO ADD WHENEVER A TASK IS OVERDUE
+
+// ADD A MESSAGE TO SAY THAT THE TASK WAS ADDED
+
+// YOU NEED TO TAKE INTO CONSIDERATION ALL THE REQUIREMENTS IN THE SCHEMA THAT CAN CAUSE PROBLEMS IN ADDING THE TASK
 
 export default function AddTask() {
     const [formData, setFormData] = React.useState({
@@ -171,14 +176,11 @@ export default function AddTask() {
     }
 
     return (
-        <div id="add-task-page">
+        <div id="subpages-container">
             {showErrorMessage &&
                 <p id="error-message">{errorMessage}</p>
             }
-            <div id="add-task--header">
-                <Link className="go-back-button" to="/">&lt;</Link>
-                <h2 className="h2-title">Create a New Task</h2>
-            </div>
+            <Title title="Create a New Task" />
             <form id="form-container" onSubmit={handleSubmit}>
                 <label className="h1-title" htmlFor="task-name">Task Name</label>
                 <input
