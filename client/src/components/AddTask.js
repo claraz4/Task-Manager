@@ -34,7 +34,7 @@ export default function AddTask() {
 
     return (
         <div id="subpages-container">
-            <Title title="Create a New Task" />
+            <Title title="Create a New Task" toLink="/" />
             <TaskForm 
                 formData={formData} 
                 setFormData={setFormData} 

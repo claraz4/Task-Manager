@@ -19,7 +19,10 @@ export default function Navbar() {
     }
 
     function handleBlur() {
-        setFocusedInput(false);
+        // without the set timeout, the user won't have the time to press the task before the task disappears
+        setTimeout(() => {
+            setFocusedInput(false);
+        }, 0); 
     }
 
     return (
@@ -46,7 +49,7 @@ export default function Navbar() {
                     </div>
                 </div>
             </nav>
-            {/*focusedInput && */<SearchResults input={searchInput} focusedInput={focusedInput} />}
+            {focusedInput && <SearchResults input={searchInput} focusedInput={focusedInput} />}
         </div>
     )
 }

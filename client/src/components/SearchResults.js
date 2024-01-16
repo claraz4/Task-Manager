@@ -7,22 +7,9 @@ import { useNavigate } from "react-router-dom";
 export default function SearchResults(props) {
     const [input, setInput] = React.useState(props.input);
     const [tasks, setTasks] = React.useState([]);
-    const [task, setTask] = React.useState({});
     const [tasksResultElement, setTasksResultElement] = React.useState([]);
     const { months } = all;
     const navigate = useNavigate();
-
-    // MAYBE MOVE THIS STEP TO THE EDIT TASK (FROM THE LOADING) AND INSTEAD THE STATE WILL BE THE ID
-    // Handles get single task requests
-    const fetchTask = async (id) => {
-        try {
-            const res = await fetch(`/api/v1/tasks/${id}`);
-            const data = await res.json();
-            setTask(data.data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     // Change the input according to the props
     React.useEffect(() => {
@@ -61,14 +48,8 @@ export default function SearchResults(props) {
 
     // Handle the button click
     async function handleClick(id) {
-        await fetchTask(id);
+        navigate('/edit-task', { state: { info: { id: id, toLink: "/" } } });
     } 
-
-    React.useEffect(() => {
-        if (Object.keys(task).length !== 0) {
-            navigate('/edit-task', { state: { data: task } });
-        }
-    }, [task])
 
     return (
         <div id="search-results--container">

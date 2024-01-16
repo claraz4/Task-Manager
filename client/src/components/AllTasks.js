@@ -33,6 +33,7 @@ export default function AllTasks() {
                 urgency={task.urgency}
                 description={task.description}
                 completed={task.completed}
+                id={task._id}
             />
         )
     }
@@ -59,7 +60,7 @@ export default function AllTasks() {
 
     return (
         <div id="subpages-container">
-            <Title title="All Tasks" />
+            <Title title="All Tasks" toLink="/" />
 
             <h1 className="h1-title">Overdue Tasks</h1>
             <br />

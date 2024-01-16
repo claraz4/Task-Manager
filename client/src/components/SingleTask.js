@@ -7,9 +7,10 @@ import redCheck from "../images/check-button-checked.webp";
 import redCircle from "../images/check-button-unchecked.webp";
 import yellowCheck from "../images/yellow-checkmark.webp";
 import yellowCircle from "../images/yellow-circle.webp";
+import { Link } from "react-router-dom";
 
 export default function SingleTask(props) {
-    const { name, urgency, description, completed } = props;
+    const { name, urgency, description, completed, id } = props;
     let progress, color, status;
 
     if (urgency === 1) {
@@ -37,7 +38,7 @@ export default function SingleTask(props) {
                 <div id="single-task--info">
                     <div id="single-task--title">
                         <h3>{name}</h3>
-                        <p>&#x2022;&#x2022;&#x2022;</p>
+                        <Link to='/edit-task' state={ {info: { id: id, toLink: "/all-tasks" }} }>&#x2022;&#x2022;&#x2022;</Link>
                     </div>
                     <h4 style={{ color: color }}>{status}</h4> {/* it will be in the color of the urgency (green, yellow, red) */}
                     <p>{description}</p>

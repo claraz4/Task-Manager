@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles.css";
 import categories from "../categories";
-import { Link } from "react-router-dom";
 import all from "../months";
 
 export default function TaskForm(props) {

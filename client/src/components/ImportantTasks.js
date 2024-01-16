@@ -25,6 +25,7 @@ export default function ImportantTasks() {
                 urgency={task.urgency}
                 category={task.category}
                 description={task.description}
+                id={task._id}
             />
         )
     })

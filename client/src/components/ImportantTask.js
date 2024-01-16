@@ -1,8 +1,8 @@
 import React from "react";
 import "../styles.css";
 import uncheckedButton from "../images/check-button-unchecked.webp";
-import checkedCheck from "../images/check-button-checked.webp";
 import all from "../months";
+import { Link } from "react-router-dom";
 
 export default function ImportantTask(props) {
     const {
@@ -10,7 +10,8 @@ export default function ImportantTask(props) {
         day,
         month,
         year,
-        description
+        description,
+        id
     } = props;
 
     const { months } = all;
@@ -22,7 +23,7 @@ export default function ImportantTask(props) {
                     <h5>{name}</h5>
                     <p>{description}</p>
                 </div>
-                <p>&#x2022;&#x2022;&#x2022;</p>
+                <Link to='/edit-task' state={ {info: { id: id, toLink: "/" }} }>&#x2022;&#x2022;&#x2022;</Link>
             </div>
             <div id="task-deadline">
                 <p>{`${day} ${months[month]} ${year}`}</p>
