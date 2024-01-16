@@ -46,7 +46,7 @@ export default function Navbar() {
                     </div>
                 </div>
             </nav>
-            {focusedInput && <SearchResults input={searchInput} focusedInput={focusedInput} />}
+            {/*focusedInput && */<SearchResults input={searchInput} focusedInput={focusedInput} />}
         </div>
     )
 }
