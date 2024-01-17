@@ -7,7 +7,6 @@ import axios from "axios";
 
 export default function EditTask() {
     const location = useLocation();
-    console.log(location)
     const toLink = location.state.info.toLink;
     const [taskID] = React.useState(location.state.info.id);
     const [isLoading, setIsLoading] = React.useState(true);

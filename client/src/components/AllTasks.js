@@ -33,6 +33,9 @@ export default function AllTasks() {
                 urgency={task.urgency}
                 description={task.description}
                 completed={task.completed}
+                day={task.day}
+                month={task.month}
+                year={task.year}
                 id={task._id}
             />
         )
@@ -41,10 +44,11 @@ export default function AllTasks() {
     // Create the arrays to be rendered
     React.useEffect(() => {
         // overdue array
-        const tomorrowsDate = new Date(Date.now() + 86400); // 1 day = 86 400 sec
+        let todaysDate = new Date(Date.now());
+        todaysDate.setHours(0, 0, 0, 0);
         const overdueTasksArray = tasks.filter((task) => {
             const taskDate = new Date(task.year, task.month, task.day);
-            return tomorrowsDate.getTime() > taskDate.getTime() && !task.completed;
+            return todaysDate.getTime() > taskDate.getTime() && !task.completed;
         })
         setOverdueTasks(overdueTasksArray.map((task, id) => taskElement(task, id)))
         
