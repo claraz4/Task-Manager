@@ -653,3 +653,34 @@ a {
     border: white 1.5px solid;
     color: white
 }
+
+
+/* CHECK TASK */
+#check-buttons--container {
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.check-button {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-1 {
+    opacity: 1;
+}
+
+.check-button:hover {
+    cursor: pointer;
+}
+
+.hover.check-button:hover {
+    opacity: 0.2;
+}

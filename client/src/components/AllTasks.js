@@ -37,6 +37,7 @@ export default function AllTasks() {
                 month={task.month}
                 year={task.year}
                 id={task._id}
+                task={task}
             />
         )
     }

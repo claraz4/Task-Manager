@@ -12,9 +12,10 @@ import { Link } from "react-router-dom";
 import bin from "../images/bin.webp"
 import binCover from "../images/bin-cover.webp"
 import DeleteTask from "./DeleteTask";
+import CheckTask from "./CheckTask";
 
 export default function SingleTask(props) {
-    const { name, urgency, description, completed, id, day, month, year } = props;
+    const { name, urgency, description, completed, id, day, month, year, task } = props;
     const { months } = all;
     const [isDeleting, setIsDeleting] = React.useState(false);
     let progress, color, status, backgroundColor;
@@ -46,7 +47,6 @@ export default function SingleTask(props) {
     // Sets the isDeleting to false
     function finishDelete() {
         setIsDeleting(false);
-        window.location.reload();
     }
 
     return (
@@ -69,8 +69,12 @@ export default function SingleTask(props) {
                     <p className="task-date" style={{ backgroundColor: backgroundColor, color: color }}>{`${day} ${months[month]} ${year}`}</p>
                 </div>
             </div>
-            {/* here we have the circle that the user can press to change the state of the task. it will also differ in color depending on the urgency */}
-            <img src={taskStatus} alt="Task Status" width="30px" height="30px" className="task-status-bg" />
+            <CheckTask 
+                urgency={urgency} 
+                completed={completed}
+                id={id}
+                task={task}
+            /> 
             {isDeleting && 
                 <DeleteTask 
                     name={name}

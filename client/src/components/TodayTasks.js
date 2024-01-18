@@ -44,9 +44,12 @@ export default function TodayTasks() {
         setTodayTaskElement(todayTask.map((task, id) => {
             return (
                 <TodayTask 
-                key={id}
-                name={task.name}
-                urgency={task.urgency}
+                    key={id}
+                    name={task.name}
+                    urgency={task.urgency}
+                    completed={task.completed}
+                    id={task._id}
+                    task={task}
                 />
                 )
             }

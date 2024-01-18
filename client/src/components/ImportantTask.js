@@ -1,8 +1,8 @@
 import React from "react";
 import "../styles.css";
-import uncheckedButton from "../images/check-button-unchecked.webp";
 import all from "../months";
 import { Link } from "react-router-dom";
+import CheckTask from "./CheckTask";
 
 export default function ImportantTask(props) {
     const {
@@ -11,7 +11,9 @@ export default function ImportantTask(props) {
         month,
         year,
         description,
-        id
+        id,
+        completed,
+        task
     } = props;
 
     const { months } = all;
@@ -27,7 +29,12 @@ export default function ImportantTask(props) {
             </div>
             <div id="task-deadline">
                 <p>{`${day} ${months[month]} ${year}`}</p>
-                <img src={uncheckedButton} alt="Checkmark" width="30px" height="30px" className="task-status-bg" />
+                <CheckTask 
+                    urgency={1} 
+                    completed={completed}
+                    id={id}
+                    task={task}
+                />
             </div>
         </div>
     )
