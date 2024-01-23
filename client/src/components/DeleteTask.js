@@ -6,7 +6,8 @@ import all from "../months";
 export default function DeleteTask(props) {
     const { name, id, day, month, year, finishDelete } = props;
     const { months } = all;
-    
+    console.log(id);
+
     // Delete a task
     async function deleteTask(id) {
         try {

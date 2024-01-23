@@ -3,16 +3,20 @@ import "../styles.css";
 import categories from "../categories";
 import all from "../months";
 
+
+// PROBLEM: WHEN WE DIRECTLY TRY TO ADD A TASK NAME WITH A WRONG FORMAT, IF WE GET TWO ERRORS AFTER THE OTHERS
+// THE MESSAGE WILL DIRECTLY GET REPLACED WITHOUT REPEATING THE ANIMATION
+
 export default function TaskForm(props) {
     const { formData, setFormData, backendFunction, submitBtnText } = props;
 
-    const [errorMessage, setErrorMessage] = React.useState("");
-    const [showErrorMessage, setShowErrorMessage] = React.useState(false);
+    const [message, setMessage] = React.useState("");
+    const [showMessage, setShowMessage] = React.useState(false);
     
     const classname = " active-blue-button";
     const [btnStatus, setBtnStatus] = React.useState(["", "", ""]);
 
-    // Set the initial value for the btn status dependeing on the formData object
+    // Set the initial value for the btn status depending on the formData object
     React.useEffect(() => {
         setBtnStatus((prev) => prev.map((urgency, id) => {
             return id + 1 === formData.urgency ? classname : ""
@@ -20,11 +24,11 @@ export default function TaskForm(props) {
     }, [formData.urgency]);
     
     // Changes when we show the error
-    const showError = (msg) => {
-        setErrorMessage(msg);
-        setShowErrorMessage(true);
+    const showStatus = (msg) => {
+        setMessage(msg);
+        setShowMessage(true);
 
-        setTimeout(() => setShowErrorMessage(false), 3900);
+        setTimeout(() => setShowMessage(false), 3900);
     }
 
     // Handle form change
@@ -152,17 +156,21 @@ export default function TaskForm(props) {
 
         // check that all required elements are filled
         if (formData.name.trim() === "") {
-            showError("Please enter the task's title!");
+            showStatus("Please enter the task's title!");
+            return;
+        } else if (formData.name.trim().length > 20) {
+            showStatus("The task name must be at most 20 characters long!");
             return;
         }
         
+        showStatus("Task successfully added!");
         backendFunction();
     }
 
     return (
         <form id="form-container" onSubmit={handleSubmit}>
-            {showErrorMessage &&
-                <p id="error-message">{errorMessage}</p>
+            {showMessage &&
+                <p id="form-message">{message}</p>
             }
 
             <label className="h1-title" htmlFor="task-name">Task Name</label>

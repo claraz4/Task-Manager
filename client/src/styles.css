@@ -417,13 +417,13 @@ a {
     }
 
     to {
-        top: 3.5%;
+        top: 4%;
     }
 }
 
 @keyframes slideOut {
     from {
-        top: 3.5%;
+        top: 4%;
     }
 
     to {
@@ -431,22 +431,21 @@ a {
     }
 }
 
-#error-message {
+#form-message {
     position: fixed;
-    top: 3.5%; 
+    top: 4%; 
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 15px;
-    height: 50px;
     width: 80%;
     background-color: var(--blue);
     text-align: center;
-    line-height: 50px;
     font-size: 1rem;
     color: var(--dark-blue);
     font-weight: 500;
     box-shadow:  3px 3px 11px rgba(0, 0, 0, 0.2);
     animation: slideIn 1s ease-in, slideOut 1s ease-out 3s;
+    padding: 15px 20px 15px 20px;
 }
 
 #subpages-container {
