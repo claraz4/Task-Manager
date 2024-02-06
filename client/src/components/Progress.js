@@ -2,7 +2,24 @@ import React from "react";
 import "../styles.css";
 import { Link } from "react-router-dom";
 
+// I DON'T KNOW WHY BUT WHEN I CLICK THE CHECK BUTTON FROM THIS PAGE, I NEED TO GO TO ALL TASKS FOR THE CHANGES TO APPEAR
+
 export default function Progress() {
+    const [tasksCompleted, setTasksCompleted] = React.useState(0);
+    const [goalTask, setGoalTask] = React.useState(8);
+    const [width, setWidth] = React.useState(tasksCompleted / goalTask * 100);
+
+    React.useEffect(() => {
+        setWidth(tasksCompleted / goalTask * 100);
+    }, [tasksCompleted, goalTask]);
+
+    console.log(width)
+
+    React.useEffect(() => {
+        console.log(tasksCompleted)
+        setTasksCompleted(JSON.parse(localStorage.getItem("completedTask")).length);
+    }, [localStorage.getItem("completedTask")]);
+
     return (
         <div id="progress-container">
             <div id="daily-progress--container">
@@ -13,9 +30,9 @@ export default function Progress() {
                 <h3>Come on, deserve that break!</h3>
                 <div className="progress-stats">
                     <div className="progress-bar">
-                        <div className="progress-left"></div>
+                        <div className="progress-left" style={ { "width" : width + "%" }}></div>
                     </div>
-                    <h6>3/8</h6>
+                    <h6>{tasksCompleted}/{goalTask}</h6>
                 </div>
                 <div className="white-button">Claim that break!</div>
             </div>

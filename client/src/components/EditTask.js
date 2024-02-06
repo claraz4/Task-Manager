@@ -82,7 +82,7 @@ export default function EditTask() {
                         backendFunction={backendSubmit}
                         submitBtnText="Submit Changes"
                     />
-                    <button onClick={handleDelete}>Delete Task</button>
+                    <button onClick={handleDelete} className="red-button-large">Delete Task</button>
                 </div>
             }
             {!isLoading && isDeleting && 

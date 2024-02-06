@@ -18,6 +18,10 @@ export default function DeleteTask(props) {
         } catch (error) {
             console.log("error");
         }
+
+        const previousItems = new Set(JSON.parse(localStorage.getItem("completedTask")) || []);
+        previousItems.delete(name);
+        localStorage.setItem("completedTask", JSON.stringify(Array.from(previousItems)));
     }
 
     // Go back to all tasks

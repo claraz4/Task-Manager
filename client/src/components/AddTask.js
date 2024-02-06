@@ -8,6 +8,10 @@ import TaskForm from "./TaskForm";
 // YOU NEED TO REMOVE THE DATES THAT ARE BEFORE TODAY (forget about this)
 // YOU ALSO NEED TO ADD WHENEVER A TASK IS OVERDUE
 
+// Make the default day at first the day of today
+
+// YOU CAN'T HAVE TWO TASKS HAVING THE SAME NAME. HANDLE THAT ERROR
+
 export default function AddTask() {
     const [formData, setFormData] = React.useState({
         name: "",

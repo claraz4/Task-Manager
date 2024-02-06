@@ -245,7 +245,6 @@ a {
 .progress-left {
     background-color: white;
     height: 100%;
-    width: 30%;
 }
 
 .white-button {
@@ -500,16 +499,25 @@ a {
     margin-right: 10px;
 }
 
-.blue-button {
+.blue-button,
+.red-button-large {
     color: white;
     border-radius: 20px;
     height: 55px;
-    width: 120px;
+    width: 100%;
     font-family: "Poppins";
     font-size: 1rem;
     font-weight: 500;
-    background-color: var(--blue);
     border: none;
+}
+
+.blue-button {
+    background-color: var(--blue);
+}
+
+.red-button-large {
+    background-color: var(--red);
+    margin-top: 10px;
 }
 
 .active-blue-button,
@@ -517,6 +525,13 @@ a {
     cursor: pointer;
     color: var(--blue);
     border: var(--blue) 1.5px solid;
+    background-color: white;
+}
+
+.red-button-large:hover {
+    cursor: pointer;
+    color: var(--red);
+    border: var(--red) 1.5px solid;
     background-color: white;
 }
 

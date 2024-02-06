@@ -14,9 +14,9 @@ export default function CheckTask(props) {
     const opacity0Class = "opacity-0";
 
     const [completed, setCompleted] = React.useState(props.completed);
-    const [opacity, setOpacity] = React.useState(opacity1Class);
-    let check, circle, color, status;
+    const [opacity, setOpacity] = React.useState(completed ? opacity1Class : opacity0Class);
 
+    let check, circle, color, status;
     if (urgency === 1) {
         check = redCheck;
         circle = redCircle;
@@ -37,32 +37,51 @@ export default function CheckTask(props) {
 
     async function handleClick() {
         // change the value of completed depending on the previous value
+
+        try {
+            await editTask(id);
+        } catch (error) {
+            console.log(error);
+        }
         setCompleted(prev => !prev);
         window.location.reload();
     }
 
-    React.useEffect(() => {
-        // Edit the status of a task
-        const editTask = async (taskID) => {
-            try {
-                await axios.patch(`/api/v1/tasks/${taskID}`, {
-                    ...task,
-                    completed: completed
-                });
-            } catch (error) {
-                console.log(error);
-            }
+    const editTask = async (taskID) => {
+        let res, updated;
+        try {
+            res = await axios.patch(`/api/v1/tasks/${taskID}`, {
+                ...task,
+                completed: !completed
+            });
+        } catch (error) {
+            console.log(error);
         }
 
-        if (completed) {
-            setOpacity(opacity1Class);
-        } else {
-            setOpacity(opacity0Class);
-        }
+        updated = res.data.updatedData;
+        handleLocalStorage(updated);
+    }
 
-        editTask(id);
-    }, [completed])
+    const handleLocalStorage = (updatedTask) => {
+         // get the previous items
+        const previousItems = new Set(JSON.parse(localStorage.getItem("completedTask")) || []);
+        console.log("name: " + updatedTask.name + "   status: " + updatedTask.completed);
+         if (updatedTask.completed) {
+             setOpacity(opacity1Class);
 
+             // add to the local storage
+             previousItems.add(updatedTask.name);
+             localStorage.setItem("completedTask", JSON.stringify(Array.from(previousItems)));
+         } else {
+             setOpacity(opacity0Class);
+             // construct the new array
+             previousItems.delete(updatedTask.name);
+             localStorage.setItem("completedTask", JSON.stringify(Array.from(previousItems)));
+         }
+         console.log(previousItems)
+    };
+
+    
     return (
         <div id="check-buttons--container">
             <img 
