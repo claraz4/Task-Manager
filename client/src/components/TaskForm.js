@@ -153,6 +153,7 @@ export default function TaskForm(props) {
     // Handle the submission of the form
     async function handleSubmit(event) {
         event.preventDefault();
+        const allTasks = await fetchData();
 
         // check that all required elements are filled
         if (formData.name.trim() === "") {
@@ -161,10 +162,34 @@ export default function TaskForm(props) {
         } else if (formData.name.trim().length > 20) {
             showStatus("The task name must be at most 20 characters long!");
             return;
+        } else if (allTasks && allTasks.has(formData.name)) {
+            showStatus("The task name is already found!");
+            return;
         }
         
+        setFormData({
+            name: "",
+            urgency: 3,
+            category: 1,
+            description: "",
+            day: (new Date(Date.now())).getDate(),
+            month: (new Date(Date.now())).getMonth(),
+            year: (new Date(Date.now())).getFullYear()
+        })
         showStatus("Task successfully added!");
         backendFunction();
+    }
+
+    // Get all tasks
+    const fetchData = async () => {
+        try {
+            const res = await fetch('/api/v1/tasks');
+            const data = await res.json();
+            const tasks = data.data;
+            return new Set (tasks.map((task) => task.name));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -183,7 +208,7 @@ export default function TaskForm(props) {
                 autoFocus="on"
                 autoComplete="off"
                 placeholder="Workout"
-                defaultValue={formData.name}
+                value={formData.name}
             />
             <br />
             <br />

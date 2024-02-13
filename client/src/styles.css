@@ -205,7 +205,7 @@ a {
 #daily-progress--container {
     background-color: rgba(8, 160, 247, 0.7);
     border-radius: 15px;
-    height: 210px;
+    height: auto;
     width: 100%;
     padding-top: 25px;
 }
@@ -218,6 +218,11 @@ a {
     margin-bottom: 20px
 }
 
+#daily-progress--container .white-button {
+    margin-bottom: 55px;
+    margin-top: -20px;
+}
+
 .progress-bar,
 .progress-left {
     border-radius: 10px;
@@ -225,7 +230,7 @@ a {
 
 .progress-stats {
     width: 70%;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
     justify-content: space-between;
 }
 

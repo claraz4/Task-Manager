@@ -2,15 +2,13 @@ import React from "react";
 import "../styles.css";
 import axios from "axios";
 import Title from "./Title";
+import all from "../months";
 import TaskForm from "./TaskForm";
 
 // A PROBLEM TO FIX: YOU CAN'T SET A TASK FOR A DATE THAT ALREADY PASSED (forget about this)
 // YOU NEED TO REMOVE THE DATES THAT ARE BEFORE TODAY (forget about this)
-// YOU ALSO NEED TO ADD WHENEVER A TASK IS OVERDUE
 
 // Make the default day at first the day of today
-
-// YOU CAN'T HAVE TWO TASKS HAVING THE SAME NAME. HANDLE THAT ERROR
 
 export default function AddTask() {
     const [formData, setFormData] = React.useState({
@@ -18,8 +16,8 @@ export default function AddTask() {
         urgency: 3,
         category: 1,
         description: "",
-        day: 1,
-        month: 0,
+        day: (new Date(Date.now())).getDate(),
+        month: (new Date(Date.now())).getMonth(),
         year: (new Date(Date.now())).getFullYear()
     });
 

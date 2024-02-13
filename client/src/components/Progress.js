@@ -6,19 +6,32 @@ import { Link } from "react-router-dom";
 
 export default function Progress() {
     const [tasksCompleted, setTasksCompleted] = React.useState(0);
-    const [goalTask, setGoalTask] = React.useState(8);
+    const [goalTask, setGoalTask] = React.useState(2);
     const [width, setWidth] = React.useState(tasksCompleted / goalTask * 100);
+    const [breakState, setBreakState] = React.useState(tasksCompleted >= goalTask);
 
     React.useEffect(() => {
         setWidth(tasksCompleted / goalTask * 100);
     }, [tasksCompleted, goalTask]);
 
-    console.log(width)
+    // Track when the user finishes all his tasks
+    React.useEffect(() => {
+        setBreakState(tasksCompleted >= goalTask);
+    }, [tasksCompleted, goalTask]);
 
     React.useEffect(() => {
         console.log(tasksCompleted)
         setTasksCompleted(JSON.parse(localStorage.getItem("completedTask")).length);
     }, [localStorage.getItem("completedTask")]);
+
+    function handleClick() {
+        // IDK WHAT YOU DO WHEN THEY FINISH ALL TASKS
+        const previousTasks = JSON.parse(localStorage.getItem("completedTask"));
+        localStorage.setItem("completedTask", JSON.stringify(previousTasks.filter((task, idx) => {
+            return idx > tasksCompleted - goalTask;
+        })));
+        window.location.reload();
+    }
 
     return (
         <div id="progress-container">
@@ -34,7 +47,9 @@ export default function Progress() {
                     </div>
                     <h6>{tasksCompleted}/{goalTask}</h6>
                 </div>
-                <div className="white-button">Claim that break!</div>
+                {
+                   breakState &&  
+                    <div className={"white-button"} onClick={handleClick}>Claim that break!</div>}
             </div>
             <Link className="add-button" to="./add-task">+</Link>
         </div>

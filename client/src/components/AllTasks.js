@@ -73,15 +73,15 @@ export default function AllTasks() {
             <br />
             <br />
 
-            <h1 className="h1-title">Completed Tasks</h1>
-            <br />
-            <div>{completedTasks}</div>
-            <br />
-            <br />
-
             <h1 className="h1-title">Current Tasks</h1>
             <br />
             <div>{currentTasks}</div>
+            <br />
+            <br />
+
+            <h1 className="h1-title">Completed Tasks</h1>
+            <br />
+            <div>{completedTasks}</div>
             <br />
             <br />
         </div>
