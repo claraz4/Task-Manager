@@ -288,6 +288,13 @@ a {
     text-decoration: none;
 }
 
+.add-button:hover {
+    background-color: rgb(8, 160, 247, 0.9);
+    border: white 1.5px solid;
+    cursor: pointer;
+    color: white;
+}
+
 /* Important Tasks */
 #important-tasks--container {
     align-self: flex-start;

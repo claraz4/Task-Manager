@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function Progress() {
     const [tasksCompleted, setTasksCompleted] = React.useState(0);
-    const [goalTask, setGoalTask] = React.useState(2);
+    const [goalTask, setGoalTask] = React.useState(5);
     const [width, setWidth] = React.useState(tasksCompleted / goalTask * 100);
     const [breakState, setBreakState] = React.useState(tasksCompleted >= goalTask);
 
@@ -21,7 +21,7 @@ export default function Progress() {
 
     React.useEffect(() => {
         console.log(tasksCompleted)
-        setTasksCompleted(JSON.parse(localStorage.getItem("completedTask")).length);
+        setTasksCompleted(JSON.parse(localStorage.getItem("completedTask")) && JSON.parse(localStorage.getItem("completedTask")).length);
     }, [localStorage.getItem("completedTask")]);
 
     function handleClick() {

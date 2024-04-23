@@ -162,20 +162,20 @@ export default function TaskForm(props) {
         } else if (formData.name.trim().length > 20) {
             showStatus("The task name must be at most 20 characters long!");
             return;
-        } else if (allTasks && allTasks.has(formData.name)) {
+        } else if (submitBtnText !== "Submit Changes" && allTasks && allTasks.has(formData.name)) {
             showStatus("The task name is already found!");
             return;
         }
         
-        setFormData({
-            name: "",
-            urgency: 3,
-            category: 1,
-            description: "",
-            day: (new Date(Date.now())).getDate(),
-            month: (new Date(Date.now())).getMonth(),
-            year: (new Date(Date.now())).getFullYear()
-        })
+        // setFormData({
+        //     name: "",
+        //     urgency: 3,
+        //     category: 1,
+        //     description: "",
+        //     day: (new Date(Date.now())).getDate(),
+        //     month: (new Date(Date.now())).getMonth(),
+        //     year: (new Date(Date.now())).getFullYear()
+        // })
         showStatus("Task successfully added!");
         backendFunction();
     }
